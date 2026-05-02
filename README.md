@@ -1,101 +1,188 @@
-# School Management System
 
-A Python-based school management system with three roles: Administrator, Teacher, and Student.
+# SAM School Management System
 
-# Overview
+A terminal-based School Management System built with Python that provides
+role-based access for Administrators, Teachers, and Students. Each role 
+has a dedicated dashboard tailored to their specific needs and 
+responsibilities within the school.
 
-This system manages students, teachers, subjects, CBT exams, and results through a console interface.
-Users authenticate with credentials in the `user` table and are directed to role-specific dashboards.
+---
 
-- `login.py`: validates credentials and identifies user role.
-- `main.py`: application entry point and dashboard router.
-- `database.py`: database connection helper.
-- `Admin/`: admin dashboard and admin actions.
-- `teacher/`: teacher dashboard and teacher actions.
-- `Student/`: student dashboard and exam actions.
+## Table of Contents
 
-# How the System Works
+- [Overview](#overview)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [How It Works](#how-it-works)
+- [Roles & Dashboards](#roles--dashboards)
+- [How to Run](#how-to-run)
+- [Requirements](#requirements)
+- [Author](#author)
 
-# Login Flow
+---
 
-Users sign in with a username and password. The system checks the `user` table, returns the role, and loads any linked teacher or student record.
-After login, the user is routed based on role:
+## Overview
 
-- `Admin` -> admin dashboard.
-- `teacher` -> teacher dashboard.
-- `student` -> student dashboard.
+SAM School Management System is a command-line application designed to 
+simplify the day-to-day management of a school. It provides a clean and 
+interactive terminal interface where users can log in based on their role 
+and access only the features relevant to them.
 
-# Role Capabilities
+The system is built entirely in Python and runs in any terminal environment,
+making it lightweight, fast, and easy to use without the need for a 
+graphical interface or internet connection.
 
-# Administrator
+---
 
-The admin dashboard lets the administrator manage core school records and exam setup:
+## Features
 
-- Add new student records with personal, guardian, and class data.
-- View all students in the database.
-- Register teachers and assign them a subject and class.
-- Add new subjects to the system.
-- View existing subjects.
-- Create CBT exams and assign them to a subject.
-	- exam name/type
-	- subject association
-	- duration in minutes
-	- term and session
+### General
+- Clean and interactive terminal interface
+- Role-based login system with secure password masking
+- Personalised dashboards for each role
+- Real-time date and time display on every screen
+- Consistent navigation across all menus
 
-# Teacher
+### Administrator
+- Add, view, update, and remove student records
+- Add, view, update, and remove teacher records
+- Manage classes and assign teachers and students
+- Create and assign subjects
+- View school-wide attendance logs
+- View exam results and assessment records
+- Generate and export academic reports
+- Manage account settings and password
 
-Teachers can manage students in their assigned class and add exam questions:
+### Teacher
+- View assigned classes and subject schedule
+- Mark and manage student attendance
+- Record and update student scores and assessments
+- View academic reports for their classes
+- Manage account settings and password
 
-- View students assigned to their class.
-- View their own teacher profile.
-- View the teacher's assigned subject.
-- Set exam questions for existing exams in their subject.
-	- enter a question prompt
-	- enter options A, B, C, D
-	- select the correct answer
+### Student
+- View personal class schedule
+- Check attendance records
+- View exam results and assessment scores
+- Track academic progress
+- Manage account settings and password
 
-# Student
+---
 
-Students use the student dashboard to take exams and check their results:
+## Project Structure
+Sam_Management/
+│
+├── Admin/
+│   ├── init.py
+│   └── admin_dashboard.py       # Admin dashboard logic and display
+│
+├── Teacher/
+│   ├── init.py
+│   └── teacher_dashboard.py     # Teacher dashboard logic and display
+│
+├── Student/
+│   ├── init.py
+│   └── student_dashboard.py     # Student dashboard logic and display
+│
+├── main.py                      # Entry point -- main menu and login
+└── README.md                    # Project documentation
 
-- Take CBT exams from the available exam list.
-- See each exam title with its related subject name.
-- Answer multiple-choice questions and submit the exam.
-- View result summaries and scores for completed exams.
-- View their own profile and class information.
 
-# Project Structure
+---
 
-- `database.py` - database connection helper.
-- `login.py` - authentication and role routing.
-- `main.py` - entry point and dashboard router.
-- `replay.py` - optional replay or workflow helper.
-- `Admin/admin_dashboard.py` - admin menu and dashboard.
-- `Admin/admin_work.py` - admin functions for subjects and exams.
-- `teacher/teacher_dashboard.py` - teacher menu.
-- `teacher/teacher_info.py` - teacher registration and lookup.
-- `teacher/teacher_work.py` - teacher actions and exam question entry.
-- `Student/student_dashboard.py` - student menu.
-- `Student/student_info.py` - student registration and helper functions.
-- `Student/student_list.py` - exam listing, exam taking, and results.
+## How It Works
 
-# Setup
+1. The system starts at the **Main Menu** where the user is welcomed and 
+   prompted to log in.
 
-1. Install Python 3.x.
-2. Place the project folder in a convenient location.
-3. Configure the database connection in `database.py`.
-4. Ensure the following tables exist: `user`, `students`, `teacher`, `subject`, `cbt_exam`, `question`, `student_answer`, `classes`.
-5. Run the application from the project root:
+2. The user enters their **username and password**. The password is masked 
+   with `*` characters for security as each character is typed.
 
-```powershell
+3. The system **verifies the credentials** and identifies the user's role 
+   (Administrator, Teacher, or Student).
+
+4. Based on the role, the user is redirected to their **dedicated dashboard** 
+   which displays a personalised welcome message and quick reminders.
+
+5. From the dashboard, the user can navigate to the features available to 
+   their role using numbered menu options.
+
+6. The user can **log out** at any time and return to the main menu, or 
+   exit the system entirely.
+
+---
+
+## Roles & Dashboards
+
+### [A] Administrator
+The Administrator has the highest level of access in the system. They are 
+responsible for managing all school data including students, teachers, 
+classes, subjects, attendance, and academic reports. The admin dashboard 
+provides a full overview of the school system and flags pending tasks that 
+require attention.
+
+### [T] Teacher
+Teachers have access to features related to their assigned classes. They 
+can mark attendance, record student scores, and view academic reports for 
+their students. The teacher dashboard displays a summary of their 
+responsibilities and reminds them of pending tasks such as unmarked 
+attendance or unsubmitted reports.
+
+### [S] Student
+Students have a read-focused dashboard where they can view their personal 
+academic information including their schedule, attendance record, and exam 
+results. The student dashboard encourages them to stay on top of their 
+studies.
+
+---
+
+## How to Run
+
+### Step 1 -- Clone the repository
+```bash
+git clone https://github.com/Big-sam513/Sam-school-management-project.git
+```
+
+### Step 2 -- Navigate to the project folder
+```bash
+cd Sam-school-management-project
+```
+
+### Step 3 -- Run the application
+```bash
 python main.py
 ```
 
-# Notes
+> Recommended: Run using **Anaconda Prompt** for the best terminal 
+> display experience.
 
-- Student exam listings now include the subject name beside each exam title.
-- Teacher-entered questions are stored in `question`.
-- Student answers are stored in `student_answer`.
-- Admin exam creation stores metadata in `cbt_exam`.
+---
+
+## Requirements
+
+- Python 3.x
+- Anaconda (recommended)
+- No external libraries required -- uses Python standard library only
+
+### Standard Libraries Used
+- `os` -- screen clearing and OS detection
+- `sys` -- system exit and stdout control
+- `time` -- loading delays and transitions
+- `datetime` -- real-time date and time display
+- `msvcrt` -- secure password masking on Windows
+- `getpass` -- secure password masking on Unix/macOS
+
+---
+
+## Author
+
+**Big-sam513**
+GitHub: [https://github.com/Big-sam513](https://github.com/Big-sam513)
+
+---
+
+## License
+
+This project is open source and available for educational purposes.
 
 
