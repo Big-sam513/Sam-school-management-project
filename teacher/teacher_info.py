@@ -1,4 +1,6 @@
 from Student.student_info import get_connection
+import getpass
+from utils import hash_password
 
 
 def register_teacher():
@@ -16,7 +18,8 @@ def register_teacher():
     class_id = input("Enter Class ID: ")
 
     username = input("\nCreate Username: ")
-    password = input("Create password: ")
+    password = getpass.getpass("Create password: ")
+    password = hash_password(password)
     role = input("Enter role: ")
 
     teacher_query = """
@@ -35,6 +38,7 @@ def register_teacher():
     conn.commit()
     print("-"*20)
     print("\nTeacher Added Successful.")
+    input("\nPress Enter to return to the Admin Dashboard...")
     
     cursor.close()
     conn.close()

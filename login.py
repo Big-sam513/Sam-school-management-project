@@ -1,5 +1,7 @@
 import time
+import getpass
 from Student.student_info import get_connection
+from utils import verify_password, input_password
 
 def login():
     attempt = 0
@@ -10,20 +12,22 @@ def login():
             print("=================== USER LOGIN ======================")
             print("\nPlease enter your login credentials.")
             username = input("\nEnter your Username: ")
-            password = input("Enter your password: ")
+            password = input_password("Enter your password: ")
             print("\n---------------------------------------------")
-
-            query = "SELECT role, teacher_id, student_id FROM user WHERE username=%s AND password=%s"
-            cursor.execute(query,(username,password))
+            query = "SELECT password, role, teacher_id, student_id FROM user WHERE username=%s"
+            cursor.execute(query,(username,))
             result = cursor.fetchone()
             if not result:
                 print("Invalid Credentials")
                 attempt += 1
                 continue
 
-            role = result[0]
-            teacher_id = result[1]
-            student_id = result[2]
+            stored_password, role, teacher_id, student_id = result
+
+            if not verify_password(stored_password, password):
+                print("Invalid Credentials")
+                attempt += 1
+                continue
 
             class_id = None
             if role == "teacher" and teacher_id:

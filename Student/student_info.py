@@ -1,4 +1,6 @@
 import pymysql as pm
+import getpass
+from utils import hash_password
 
 
 def get_connection():
@@ -107,7 +109,8 @@ def add_student():
 
     print("\nCreate login")
     print("-"*30)
-    password = input("Create Password: ")
+    password = getpass.getpass("Create Password: ")
+    password = hash_password(password)
     student_class_id = select_class()
     if student_class_id is None:
         print("Cannot add student without class selection.")
@@ -141,12 +144,11 @@ def add_student():
 
 
 
-    query = f"""
-    INSERT INTO user(username, password, role, student_id)
-    VALUES("{admission_no}", "{password}", "Student", "{student_id}")
-    """
-    cursor.execute(query)
+    query = "INSERT INTO user(username, password, role, student_id) VALUES(%s, %s, %s, %s)"
+    cursor.execute(query, (admission_no, password, "Student", student_id))
     conn.commit()
+
+    input("\nPress Enter to return to the Admin Dashboard...")
 
 
 if __name__ == '__main__':

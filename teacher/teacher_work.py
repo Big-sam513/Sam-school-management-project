@@ -9,14 +9,12 @@ def view_student(teacher_id):
     cursor = conn.cursor()
     name = teacher_title(teacher_id)
     subject = fetch_subject(teacher_id)
-    print("="*35)
-    print("""
-                MODULE: Student Management
-                ACTION: View My Students
-            """)
-    print(f"TEACHER: {name}")
-    print(f"SUBJECT: {subject}")
-    print("="*35)
+    print(" "*7 + "="*35)
+    print(" "*10 + "MODULE: Student Management")
+    print(" "*10 + "ACTION: View My Students")
+    print(" "*10 + f"TEACHER: {name}")
+    print(" "*10 + f"SUBJECT: {subject}")
+    print(" "*7 + "="*35)
 
 
     try:
@@ -56,7 +54,9 @@ def view_student(teacher_id):
     finally:
         conn.close()
         cursor.close()
-        # print(s)
+        
+    
+    input("\nPress Enter to return to the Teacher Dashboard...")
 
 # view_student()
 
@@ -85,6 +85,9 @@ def teacher_profile(teacher_id):
     else:
         print("Teacher Profile not found.")
 
+
+    input("\nPress Enter to return to the Teacher Dashboard...")
+
 # teacher_profile()
 
 
@@ -106,6 +109,8 @@ def teacher_subject(teacher_id):
         print("="*20)
     else:
         print("Teacher Subject not found.")
+
+    input("\nPress Enter to return to the Teacher Dashboard...")
 
 
 
@@ -179,6 +184,7 @@ def set_exam_questions(teacher_id):
         if not more == "y":
             break
 
+        input("\nPress Enter to return to the Teacher Dashboard...")
 
 
 

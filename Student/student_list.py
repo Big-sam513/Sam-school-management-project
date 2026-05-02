@@ -31,6 +31,8 @@ def view_student():
     cursor.close()
     conn.close()
 
+    input("\nPress Enter to return to the Admin Dashboard...")
+
 # view_student()
 
 
@@ -218,6 +220,10 @@ def view_results(student_id):
         conn.close()
 
 
+    
+    input("\nPress Enter to return to the Teacher Dashboard...")
+
+
 
 def view_student_profile(student_id):
     conn = get_connection()
@@ -248,3 +254,7 @@ def view_student_profile(student_id):
 
         cursor.close()
         conn.close()
+
+
+        
+    input("\nPress Enter to return to the Teacher Dashboard...")

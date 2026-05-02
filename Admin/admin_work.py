@@ -17,6 +17,8 @@ def manage_subject():
     print("-"*30)
     print("\nSubject Added Successfully...")
 
+    input("\nPress Enter to return to the Admin Dashboard...")
+
 def view_subjects():
     conn =get_connection()
     cursor = conn.cursor()
@@ -42,6 +44,8 @@ def view_subjects():
             print("{:<10} {:<30}".format(subject[0], subject[1]))
     else:
         print("No subjects found in the database.")
+
+    input("\nPress Enter to return to the Admin Dashboard...")
 
 
 def manage_exams():
@@ -85,6 +89,8 @@ def manage_exams():
     conn.commit()
     time.sleep(2)
     print("\nExam Added Successfully")
+
+    input("\nPress Enter to return to the Admin Dashboard...")
 
 # manage_exams()
 # manage_subject()
